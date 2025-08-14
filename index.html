@@ -24,6 +24,15 @@
         min-height: 100vh;
       }
 
+      .footer-logo {
+        display: block;
+        margin: 0 auto 8px auto;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
       .chakra {
         margin: 20px auto;
         height: 100px;
@@ -62,6 +71,7 @@
       .content {
         position: relative;
         z-index: 1;
+        padding-bottom: 100px; /* space for footer */
       }
 
       .share-button {
@@ -80,10 +90,31 @@
         transform: scale(1.1);
       }
 
-      footer {
-        margin-top: 40px;
+      footer.site-footer {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.92);
         color: #000;
-        font-weight: bold;
+        font-weight: 700;
+        padding: 10px 20px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+      }
+
+      footer.site-footer .footer-text {
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 480px) {
+        h1 { font-size: 2rem; }
+        p { font-size: 1rem; }
+        .chakra { height: 80px; }
+        .footer-logo { width: 40px; height: 40px; }
       }
     </style>
   </head>
@@ -94,10 +125,13 @@
       <h1>Happy Independence Day!</h1>
       <p>Let's celebrate freedom, unity, and pride by building something beautiful. 🇮🇳</p>
       <button class="share-button" onclick="shareSite()">Share This Website</button>
-      <footer>
-        Made with ❤️ by CodeWithArhan
-      </footer>
     </div>
+
+    <!-- Footer with logo: place your logo file named "logo.png" in the same folder or change the src path -->
+    <footer class="site-footer">
+      <img src="codewitharhan.png" alt="Site Logo" class="footer-logo" />
+      <div class="footer-text">Made with ❤️ by CodeWithArhan</div>
+    </footer>
 
     <script>
       // Fireworks effect
@@ -105,6 +139,11 @@
       const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
 
       class Firework {
         constructor(x, y, radius, color, vx, vy) {
